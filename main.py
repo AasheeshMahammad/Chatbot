@@ -9,5 +9,5 @@ def tokenize(sentence):
 def stem(word):
     return stemmer.stem(word)
 
-def bag_of_words(tokenzied_sentence, words):
+def bag_of_words(tokenized_sentence, words):
     pass
