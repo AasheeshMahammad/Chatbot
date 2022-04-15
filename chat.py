@@ -22,10 +22,12 @@ model.eval()
 d1={}
 bot_name = "Mr.Rebot"
 all_prev_tags=[]
+quits=False
 print("type quit to exit")
 while True and ded==False:
     sentence = input("request : ").lower()
     if sentence == "quit":
+        quits=True
         break
     sentence = tokenize(sentence)
     x = bag_of_words(sentence,all_words)
@@ -33,7 +35,7 @@ while True and ded==False:
     x = torch.from_numpy(x).to(device)
     output = model(x)
 
-    _, predicted = torch.max(output, dim=1)          
+    _, predicted = torch.max(output, dim=1)       
 
     tag = tags[predicted.item()]
     if(tag=="disagree" and len(all_prev_tags)>0):
@@ -67,7 +69,8 @@ while True and ded==False:
     else:
         print(f"{bot_name}: No solution found for your query would like you to visit a service center")
         ded=True
-print("Hi Welcome to appointment Booking Section")
-print("Here you find a idiot by the name of SVSC Santhosh")
+if(quits==False):
+    print("Hi Welcome to appointment Booking Section")
+    print("Here you find a idiot by the name of SVSC Santosh")
 
 
