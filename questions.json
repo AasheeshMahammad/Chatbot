@@ -211,9 +211,19 @@
 			]
 		},
 		{
-			"tag":"",
-			"patterns":[],
-			"responses":[]
+			"tag":"background processes",
+			"patterns":[
+				"How to Stop so many unnecessary process from running in background" ,
+				"How to fix too many background processes ",
+				"How do I reduce the number of processes running in Windows 10?" 
+			],
+			"responses":[
+				"Reduce Background Processes Using Task Manager" ,
+				"Strip Down Windows 10 Startup Processes ",
+				"Disable Third-Party Software Services from Windows Startup" ,
+				"Free up Resources Windows 10 through System Configuration" ,
+				"Enable Battery saver on your device which prevents unnecessary app from starting up automatically." 
+			]
 		}
 	]
 }
