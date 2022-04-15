@@ -117,16 +117,18 @@ if __name__=="__main__":
         elif(tag=="agree" or tag=="thanks"):
             all_prev_tags=[]
             all_prev_probs=[]
+            d1={}
         else:
             all_prev_tags.append(predicted)
             all_prev_probs.append(fina_prob) 
         print("Tag decided now is :",tag,"Prob of which is :",fina_prob)    
-        if fina_prob > 0.95:
+        if fina_prob > 0.7:
             for intent in intents["intents"]:
                 if tag == intent["tag"]:
-                    if(tag not in d1):
+                    if(tag not in d1 ):
                         picks=random.choice(intent['responses'])
-                        d1[tag]=[picks]
+                        if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment"]):
+                            d1[tag]=[picks]
                         print(f"{bot_name}: {picks}")
                     else:                    
                         if(len(d1[tag])==5):
@@ -142,9 +144,10 @@ if __name__=="__main__":
                                 exit(0)
                         else:
                             picks=random.choice(intent['responses'])
-                            while(len(d1[tag])<5 and picks in d1[tag]):
-                                picks=random.choice(intent['responses'])
-                            d1[tag].append(picks)
+                            if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment"]):
+                                while(len(d1[tag])<5 and picks in d1[tag]):
+                                    picks=random.choice(intent['responses'])
+                                d1[tag].append(picks)
                             print(f"{bot_name}: {picks}")
                     if(tag in ["goodbye","thanks"]):
                         quits=True
