@@ -1,4 +1,5 @@
 import random, json, torch
+from regex import L
 from model import NeuralNet
 from utils import bag_of_words, tokenize
 from geopy.geocoders import Nominatim
@@ -11,22 +12,13 @@ with open("intents.json",'r') as f:
 file = "data.pth"
 data = torch.load(file)
 
-def clear_screen():
-    sleep(5)
+def clear_screen(duration):
+    sleep(duration)
     os.system('cls')
-
-def locations():    
-    loc = Nominatim(user_agent="GetLoc")
-    print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers")
-    print("User:",end=' ')
-    lc = input()
-    getLoc = loc.geocode(lc)
-    latitude = getLoc.latitude
-    longitude = getLoc.longitude
+def show_locs(latitude,longitude,limit):
     URL = "https://discover.search.hereapi.com/v1/discover"
     api_key = "d6-oHLamtfluzYmMSL86mPgCa6QQrVu7-zfzexMgNKk" 
     query = 'Laptop Service'
-    limit = 10
     PARAMS = {'apikey':api_key,'q':query,'limit': limit,'at':'{},{}'.format(latitude,longitude)}
     r = requests.get(url = URL, params = PARAMS)
     data = r.json()
@@ -43,11 +35,38 @@ def locations():
             else:	print(f"Title:{i['title']}\nAddress:{i['address']['label']}\nDistance:{i['distance']}m")
         else:	print(f"Title:{i['title']}\nAddress:{i['address']['label']}\nDistance:{i['distance']}m")
         print("---------------------------------------------")
+    return data
+
+def locations(latitude,longitude,lc): 
+    limit = 2
+    while(True):
+        data=show_locs(latitude,longitude,limit)
+        print(f"{bot_name}Enter choice between 1-{limit} to confirm your appoinment at that service center any other number to show 2 more centers which might be closer to your location")
+        print("User:",end=' ')
+        choice=int(input())
+        if(choice>=0 and choice<=limit):
+            return data[choice-1]['title']            
+        else:
+            limit+=2
+            clear_screen(1)
+            print(f"{bot_name}: Hi Welcome to appointment Booking Section")
+            loc = Nominatim(user_agent="GetLoc")
+            print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers")
+            print("User:",lc)
+    
 
 def book_appointment():
-    clear_screen()
+    clear_screen(5)
     print(f"{bot_name}: Hi Welcome to appointment Booking Section")
-    locations()
+    loc = Nominatim(user_agent="GetLoc")
+    print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers")
+    print("User:",end=' ')
+    lc = input()
+    getLoc = loc.geocode(lc)
+    latitude = getLoc.latitude
+    longitude = getLoc.longitude
+    choosen=locations(latitude,longitude,lc)
+    print("Appointment confirmed at",choosen)
 
 if __name__=="__main__":
     input_size = data["input_size"]
