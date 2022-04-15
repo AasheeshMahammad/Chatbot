@@ -123,6 +123,7 @@ if __name__=="__main__":
         print("Tag decided now is :",tag,"Prob of which is :",fina_prob)    
         if fina_prob > 0.70:
             for intent in intents["intents"]:
+                #linear search 
                 if tag == intent["tag"]:
                     if(tag not in d1):
                         picks=random.choice(intent['responses'])
