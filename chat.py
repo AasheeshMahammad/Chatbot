@@ -1,5 +1,6 @@
 import random, json, torch
 from regex import L
+from AutoCorrect import AutoCorrect
 from model import NeuralNet
 from utils import bag_of_words, tokenize
 from geopy.geocoders import Nominatim
@@ -85,6 +86,7 @@ if __name__=="__main__":
     all_prev_probs=[]
     quits=False
     print("type quit to exit")
+    autCorrect = AutoCorrect(all_words)
     while ded==False and quits==False:
         print()
         sentence = input("request : ").lower()
@@ -92,6 +94,7 @@ if __name__=="__main__":
             quits=True
             break
         sentence = tokenize(sentence)
+        sentence = [autCorrect.correctWord(word) for word in sentence]
         x = bag_of_words(sentence,all_words)
         x = x.reshape(1,x.shape[0])
         x = torch.from_numpy(x).to(device)
