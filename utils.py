@@ -7,7 +7,7 @@ stemmer = SnowballStemmer("english")
 
 
 def tokenize(sentence):
-    return nltk.word_tokenize(sentence)
+    return nltk.word_tokenize(sentence).lower()
 
 def stem(word):
     return stemmer.stem(word)

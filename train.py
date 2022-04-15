@@ -26,7 +26,7 @@ for intent in intents["intents"]:
         train_data.append((w,tag))
 
 punctuations = {'?','!','.',','}
-all_words = [stem(w).lower() for w in all_words if w not in punctuations]
+all_words = [stem(w) for w in all_words if w not in punctuations]
 all_words = sorted(set(all_words))
 tags = sorted(set(tags))
 
