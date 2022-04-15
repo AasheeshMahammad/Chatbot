@@ -1,12 +1,11 @@
 import random, json, torch
 from AutoCorrect import AutoCorrect
 from model import NeuralNet
-from utils import bag_of_words, tokenize
+from utils import bag_of_words, tokenize, insertdb
 from geopy.geocoders import Nominatim
 import requests
 import os
 from time import sleep
-
 
 device = torch.device('cuda' if torch.cuda.is_available()  else 'cpu')
 with open("intents.json",'r') as f:
@@ -47,7 +46,7 @@ def locations(latitude,longitude,lc):
         print("User:",end=' ')
         choice=int(input())
         if(choice>=0 and choice<=limit):
-            return data[choice-1]['title']            
+            return data[choice-1]            
         else:
             limit+=2
             clear_screen(1)
@@ -69,6 +68,10 @@ def book_appointment():
     longitude = getLoc.longitude
     choosen=locations(latitude,longitude,lc)
     print("Appointment confirmed at",choosen)
+    fname = input("Enter your first name: ")
+    lname = input("Enter your last name: ")
+    lapname = input("Enter Laptop name and model: ")
+    insertdb(fname,lname,lapname,choosen['title'],choosen['address'])
 
 if __name__=="__main__":
     input_size = data["input_size"]

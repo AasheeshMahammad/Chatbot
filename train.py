@@ -1,5 +1,5 @@
 import json
-from utils import bag_of_words, tokenize, stem
+from utils import bag_of_words, tokenize, stem, init_db
 import numpy as np
 
 import torch
@@ -9,8 +9,7 @@ from torch.utils.data import Dataset, DataLoader
 from model import NeuralNet
 
 df = "intents.json"
-#df = "questions.json"
-
+init_db()
 with open(df) as file:
     intents = json.load(file)
 
