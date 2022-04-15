@@ -12,12 +12,10 @@ with open("intents.json",'r') as f:
     intents = json.load(f)
 file = "data.pth"
 data = torch.load(file)
-bot_name = "Mr.Rebot"
 
 def clear_screen(duration):
     sleep(duration)
     os.system('cls')
-
 def show_locs(latitude,longitude,limit):
     URL = "https://discover.search.hereapi.com/v1/discover"
     api_key = "d6-oHLamtfluzYmMSL86mPgCa6QQrVu7-zfzexMgNKk" 
@@ -45,7 +43,7 @@ def locations(latitude,longitude,lc):
     while(True):
         data=show_locs(latitude,longitude,limit)
         print(f"{bot_name}: Enter choice between 1-{limit} to confirm your appoinment at that service center any other number to show 2 more centers which might be closer to your location")
-        print("You:",end=' ')
+        print("User:",end=' ')
         choice=int(input())
         if(choice>=0 and choice<=limit):
             return data[choice-1]            
@@ -55,24 +53,25 @@ def locations(latitude,longitude,lc):
             print(f"{bot_name}: Hi Welcome to appointment Booking Section")
             loc = Nominatim(user_agent="GetLoc")
             print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers")
-            print("You:",lc)
+            print("User:",lc)
     
 
 def book_appointment():
     clear_screen(5)
     print(f"{bot_name}: Hi Welcome to appointment Booking Section")
     loc = Nominatim(user_agent="GetLoc")
-    print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers:\n")
+    print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers")
+    print("User:",end=' ')
     lc = input()
     getLoc = loc.geocode(lc)
     latitude = getLoc.latitude
     longitude = getLoc.longitude
     choosen=locations(latitude,longitude,lc)
     print("Appointment confirmed at",choosen["title"])
-    name = input("Enter your name: ")
+    fname = input("Enter your first name: ")
+    lname = input("Enter your last name: ")
     lapname = input("Enter Laptop name and model: ")
-    problem = input("Describe your problem in not more than 300 words:\n")
-    insertdb(name,lapname,problem,choosen['title'],choosen['address']['label'])
+    insertdb(fname,lname,lapname,choosen['title'],choosen['address']['label'])
     exit(0)
 
 if __name__=="__main__":
@@ -86,15 +85,16 @@ if __name__=="__main__":
     model = NeuralNet(input_size, hidden_size, output_size).to(device)
     model.load_state_dict(model_state)
     model.eval()
+    bot_name = "Mr.Rebot"
     d1={}
     all_prev_tags=[]
     all_prev_probs=[]
     quits=False
-    print("Type quit to exit")
+    print("type quit to exit")
     autCorrect = AutoCorrect(all_words)
     while ded==False and quits==False:
         print()
-        sentence = input("You: ").lower()
+        sentence = input("U : ").lower()
         if sentence == "quit":
             quits=True
             break
@@ -117,35 +117,37 @@ if __name__=="__main__":
         elif(tag=="agree" or tag=="thanks"):
             all_prev_tags=[]
             all_prev_probs=[]
+            d1={}
         else:
             all_prev_tags.append(predicted)
             all_prev_probs.append(fina_prob) 
         print("Tag decided now is :",tag,"Prob of which is :",fina_prob)    
-        if fina_prob > 0.70:
+        if fina_prob > 0.7:
             for intent in intents["intents"]:
-                #linear search 
                 if tag == intent["tag"]:
-                    if(tag not in d1):
+                    if(tag not in d1 ):
                         picks=random.choice(intent['responses'])
-                        d1[tag]=[picks]
+                        if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment"]):
+                            d1[tag]=[picks]
                         print(f"{bot_name}: {picks}")
                     else:                    
                         if(len(d1[tag])==5):
                             ded=True
                             print(f"{bot_name}: All possible solutions have been tried. Would You Like to go ahead to book an appointment at a Service Centre")
                             print(f"{bot_name}: Enter Yes or No only")
-                            print("You :",end=' ')
+                            print("U :",end=' ')
                             ch=input().lower()
                             if(ch=="yes"):
-                                print("So taking you to a service center appointment part in 5 seconds")
+                                print("So taking you to a service center appointment part in 5 seconds")                                                      
                                 book_appointment()
                             else:
                                 exit(0)
                         else:
                             picks=random.choice(intent['responses'])
-                            while(len(d1[tag])<5 and picks in d1[tag]):
-                                picks=random.choice(intent['responses'])
-                            d1[tag].append(picks)
+                            if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment"]):
+                                while(len(d1[tag])<5 and picks in d1[tag]):
+                                    picks=random.choice(intent['responses'])
+                                d1[tag].append(picks)
                             print(f"{bot_name}: {picks}")
                     if(tag in ["goodbye","thanks"]):
                         quits=True
@@ -153,15 +155,14 @@ if __name__=="__main__":
         else:
             ded=True
             print(f"{bot_name}: No solution found for your query. Type Yes to go ahead to book an appoinment No to stop")
-            print("You: ",end=' ')
+            print("U :",end=' ')
             ch=input().lower()
             if(ch=="yes"):
-                print("So taking you to a service center appointment part in 5 seconds")
+                print("So taking you to a service center appointment part in 5 seconds")                                                      
                 book_appointment() 
             else:
                 exit(0)      
 
     if(quits==False):
         book_appointment()
-
 
