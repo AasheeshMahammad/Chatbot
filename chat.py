@@ -68,7 +68,6 @@ while True and ded==False:
         print(f"{bot_name}: No solution found for your query would like you to visit a service center")
         ded=True
 print("Hi Welcome to appointment Booking Section")
-print("Here you find a idiot by the name of Rohith G")
-
+print("Here you find a idiot by the name of SVSC Santhosh")
 
 
