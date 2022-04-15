@@ -56,7 +56,7 @@
       {
         "tag": "agree",
         "patterns": ["It works","fine","ok","sure","ill try"],
-        "responses": ["Good. Anything else?"]
+        "responses": ["So anything else?"]
       },
       {
         "tag":"disagree",
@@ -64,6 +64,7 @@
           "its not working",
           "doesnt work",
           "is there another way or method",
+          "any other way",
           "i cant or cannot fix it",
           "give me another solution",
           "I dont think it works",
@@ -80,7 +81,7 @@
           "I dont know what to do",
           "I had enough"
         ],
-        "responses":["OK then. Let's book an appointment for your system.\nTo help me find the nearest service centre for you, enter your location in 'area city' format."]
+        "responses":["Would You Like to go ahead to book an appointment at a Service Centre?\nEnter Yes or No only: "]
       },
       {
         "tag":"laptop overheating",

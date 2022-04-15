@@ -17,6 +17,7 @@ bot_name = "Mr.Rebot"
 def clear_screen(duration):
     sleep(duration)
     os.system('cls')
+
 def show_locs(latitude,longitude,limit):
     URL = "https://discover.search.hereapi.com/v1/discover"
     api_key = "d6-oHLamtfluzYmMSL86mPgCa6QQrVu7-zfzexMgNKk" 
@@ -93,7 +94,7 @@ if __name__=="__main__":
     autCorrect = AutoCorrect(all_words)
     while ded==False and quits==False:
         print()
-        sentence = input("You : ").lower()
+        sentence = input("You: ").lower()
         if sentence == "quit":
             quits=True
             break
@@ -120,7 +121,7 @@ if __name__=="__main__":
             all_prev_tags.append(predicted)
             all_prev_probs.append(fina_prob) 
         print("Tag decided now is :",tag,"Prob of which is :",fina_prob)    
-        if fina_prob > 0.95:
+        if fina_prob > 0.70:
             for intent in intents["intents"]:
                 if tag == intent["tag"]:
                     if(tag not in d1):
@@ -135,7 +136,7 @@ if __name__=="__main__":
                             print("You :",end=' ')
                             ch=input().lower()
                             if(ch=="yes"):
-                                print("So taking you to a service center appointment part in 5 seconds")                                                      
+                                print("So taking you to a service center appointment part in 5 seconds")
                                 book_appointment()
                             else:
                                 exit(0)
@@ -151,10 +152,10 @@ if __name__=="__main__":
         else:
             ded=True
             print(f"{bot_name}: No solution found for your query. Type Yes to go ahead to book an appoinment No to stop")
-            print("You :",end=' ')
+            print("You: ",end=' ')
             ch=input().lower()
             if(ch=="yes"):
-                print("So taking you to a service center appointment part in 5 seconds")                                                      
+                print("So taking you to a service center appointment part in 5 seconds")
                 book_appointment() 
             else:
                 exit(0)      
