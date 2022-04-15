@@ -3,7 +3,7 @@ class AutoCorrect:
         self.collection = collection
 
     def create_pairs(self, word):
-        if len(word) == 1:
+        if len(word) <= 1:
             return word
         pairs = [word[i] + word[i+1] for i in range(len(word)-1)]
         return pairs

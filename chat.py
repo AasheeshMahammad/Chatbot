@@ -1,5 +1,4 @@
 import random, json, torch
-from regex import L
 from AutoCorrect import AutoCorrect
 from model import NeuralNet
 from utils import bag_of_words, tokenize
@@ -7,6 +6,8 @@ from geopy.geocoders import Nominatim
 import requests
 import os
 from time import sleep
+
+
 device = torch.device('cuda' if torch.cuda.is_available()  else 'cpu')
 with open("intents.json",'r') as f:
     intents = json.load(f)
