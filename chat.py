@@ -42,7 +42,7 @@ def locations(latitude,longitude,lc):
     limit = 2
     while(True):
         data=show_locs(latitude,longitude,limit)
-        print(f"{bot_name}Enter choice between 1-{limit} to confirm your appoinment at that service center any other number to show 2 more centers which might be closer to your location")
+        print(f"{bot_name}: Enter choice between 1-{limit} to confirm your appoinment at that service center any other number to show 2 more centers which might be closer to your location")
         print("User:",end=' ')
         choice=int(input())
         if(choice>=0 and choice<=limit):
@@ -67,11 +67,11 @@ def book_appointment():
     latitude = getLoc.latitude
     longitude = getLoc.longitude
     choosen=locations(latitude,longitude,lc)
-    print("Appointment confirmed at",choosen)
+    print("Appointment confirmed at",choosen["title"])
     fname = input("Enter your first name: ")
     lname = input("Enter your last name: ")
     lapname = input("Enter Laptop name and model: ")
-    insertdb(fname,lname,lapname,choosen['title'],choosen['address'])
+    insertdb(fname,lname,lapname,choosen['title'],choosen['address']['label'])
 
 if __name__=="__main__":
     input_size = data["input_size"]
@@ -120,7 +120,7 @@ if __name__=="__main__":
             all_prev_tags.append(predicted)
             all_prev_probs.append(fina_prob) 
         print("Tag decided now is :",tag,"Prob of which is :",fina_prob)    
-        if fina_prob > 0.95:
+        if fina_prob > 0.5:
             for intent in intents["intents"]:
                 if tag == intent["tag"]:
                     if(tag not in d1):
@@ -142,8 +142,8 @@ if __name__=="__main__":
                         quits=True
                 else: continue
         else:
-            print(f"{bot_name}: No solution found for your query So taking you to a service center appointment part in 5 seconds")
             ded=True
+            print(f"{bot_name}: No solution found for your query. Type ")
     if(quits==False):
         book_appointment()
 
