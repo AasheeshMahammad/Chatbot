@@ -31,10 +31,10 @@ stemmer = SnowballStemmer("english")
 
 
 def tokenize(sentence):
-    return nltk.word_tokenize(sentence).lower()
+    return nltk.word_tokenize(sentence)
 
 def stem(word):
-    return stemmer.stem(word)
+    return stemmer.stem(word).lower()
 
 def bag_of_words(tokenized_sentence, words):
     tokenized_sentence = set(map(stem,tokenized_sentence))
