@@ -8,7 +8,10 @@ from torch.utils.data import Dataset, DataLoader
 
 from model import NeuralNet
 
-with open("intents.json") as file:
+# df = "intents.json"
+df = "questions.json"
+
+with open("questions.json") as file:
     intents = json.load(file)
 
 all_words = []
