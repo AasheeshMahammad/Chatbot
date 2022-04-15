@@ -12,6 +12,7 @@ with open("intents.json",'r') as f:
     intents = json.load(f)
 file = "data.pth"
 data = torch.load(file)
+bot_name = "Mr.Rebot"
 
 def clear_screen(duration):
     sleep(duration)
@@ -43,7 +44,7 @@ def locations(latitude,longitude,lc):
     while(True):
         data=show_locs(latitude,longitude,limit)
         print(f"{bot_name}: Enter choice between 1-{limit} to confirm your appoinment at that service center any other number to show 2 more centers which might be closer to your location")
-        print("User:",end=' ')
+        print("You:",end=' ')
         choice=int(input())
         if(choice>=0 and choice<=limit):
             return data[choice-1]            
@@ -53,25 +54,24 @@ def locations(latitude,longitude,lc):
             print(f"{bot_name}: Hi Welcome to appointment Booking Section")
             loc = Nominatim(user_agent="GetLoc")
             print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers")
-            print("User:",lc)
+            print("You:",lc)
     
 
 def book_appointment():
     clear_screen(5)
     print(f"{bot_name}: Hi Welcome to appointment Booking Section")
     loc = Nominatim(user_agent="GetLoc")
-    print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers")
-    print("User:",end=' ')
+    print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers:\n")
     lc = input()
     getLoc = loc.geocode(lc)
     latitude = getLoc.latitude
     longitude = getLoc.longitude
     choosen=locations(latitude,longitude,lc)
     print("Appointment confirmed at",choosen["title"])
-    fname = input("Enter your first name: ")
-    lname = input("Enter your last name: ")
+    name = input("Enter your name: ")
     lapname = input("Enter Laptop name and model: ")
-    insertdb(fname,lname,lapname,choosen['title'],choosen['address']['label'])
+    problem = input("Describe your problem in not more than 300 words:\n")
+    insertdb(name,lapname,problem,choosen['title'],choosen['address']['label'])
 
 if __name__=="__main__":
     input_size = data["input_size"]
@@ -84,16 +84,15 @@ if __name__=="__main__":
     model = NeuralNet(input_size, hidden_size, output_size).to(device)
     model.load_state_dict(model_state)
     model.eval()
-    bot_name = "Mr.Rebot"
     d1={}
     all_prev_tags=[]
     all_prev_probs=[]
     quits=False
-    print("type quit to exit")
+    print("Type quit to exit")
     autCorrect = AutoCorrect(all_words)
     while ded==False and quits==False:
         print()
-        sentence = input("request : ").lower()
+        sentence = input("You : ").lower()
         if sentence == "quit":
             quits=True
             break

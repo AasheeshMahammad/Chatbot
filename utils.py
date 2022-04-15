@@ -14,9 +14,9 @@ def init_db():
     cursor_obj.execute("DROP TABLE IF EXISTS INFO")
     # Creating table
     table = """ CREATE TABLE INFO (
-                First_Name VARCHAR(25) NOT NULL,
-                Last_Name VARCHAR(25),
+                Name VARCHAR(25) NOT NULL,
                 Lap_name VARCHAR(25) NOT NULL,
+                Problem VARCHAR(300),
                 Serv_centre VARCHAR(100) NOT NULL,
                 Serv_addr VARCHAR(200) NOT NULL,
                 Apntmnt_dt DATETIME
@@ -27,15 +27,14 @@ def init_db():
     # Close the connection
     connection_obj.close()
 
-def insertdb(fname,lname,lapname,servcentre,servaddr):
+def insertdb(name,lapname,problem,servcentre,servaddr):
     conn = sqlite3.connect('log.db')
     cur = conn.cursor()
-    cur.execute(f"INSERT INTO INFO VALUES ('{fname}','{lname}','{lapname}','{servcentre}','{servaddr}', DATE('now','+1 day'))")
+    cur.execute(f"INSERT INTO INFO VALUES ('{name}','{lapname}','{servcentre}','{problem}','{servaddr}', DATE('now','+1 day'))")
     conn.commit()
     conn.close()
 
 def viewdb():
-    print("here")
     conn = sqlite3.connect('log.db')
     cur = conn.cursor()
     data = cur.execute('''SELECT * FROM INFO''')
