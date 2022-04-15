@@ -114,6 +114,7 @@ if __name__=="__main__":
                             print(f"{bot_name}: {picks}")
                     if(tag in ["goodbye","thanks"]):
                         quits=True
+                else: continue
         else:
             print(f"{bot_name}: No solution found for your query So taking you to a service center appointment part in 5 seconds")
             ded=True
