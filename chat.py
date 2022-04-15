@@ -72,6 +72,7 @@ def book_appointment():
     lapname = input("Enter Laptop name and model: ")
     problem = input("Describe your problem in not more than 300 words:\n")
     insertdb(name,lapname,problem,choosen['title'],choosen['address']['label'])
+    exit(0)
 
 if __name__=="__main__":
     input_size = data["input_size"]
@@ -119,7 +120,7 @@ if __name__=="__main__":
             all_prev_tags.append(predicted)
             all_prev_probs.append(fina_prob) 
         print("Tag decided now is :",tag,"Prob of which is :",fina_prob)    
-        if fina_prob > 0.5:
+        if fina_prob > 0.95:
             for intent in intents["intents"]:
                 if tag == intent["tag"]:
                     if(tag not in d1):
@@ -128,9 +129,16 @@ if __name__=="__main__":
                         print(f"{bot_name}: {picks}")
                     else:                    
                         if(len(d1[tag])==5):
-                            print(f"{bot_name}: All possible solutions have been tried So taking you to a service center appointment part in 5 seconds")
                             ded=True
-                            book_appointment()
+                            print(f"{bot_name}: All possible solutions have been tried. Would You Like to go ahead to book an appointment at a Service Centre")
+                            print(f"{bot_name}: Enter Yes or No only")
+                            print("You :",end=' ')
+                            ch=input().lower()
+                            if(ch=="yes"):
+                                print("So taking you to a service center appointment part in 5 seconds")                                                      
+                                book_appointment()
+                            else:
+                                exit(0)
                         else:
                             picks=random.choice(intent['responses'])
                             while(len(d1[tag])<5 and picks in d1[tag]):
@@ -142,7 +150,15 @@ if __name__=="__main__":
                 else: continue
         else:
             ded=True
-            print(f"{bot_name}: No solution found for your query. Type ")
+            print(f"{bot_name}: No solution found for your query. Type Yes to go ahead to book an appoinment No to stop")
+            print("You :",end=' ')
+            ch=input().lower()
+            if(ch=="yes"):
+                print("So taking you to a service center appointment part in 5 seconds")                                                      
+                book_appointment() 
+            else:
+                exit(0)      
+
     if(quits==False):
         book_appointment()
 
