@@ -4,7 +4,7 @@ from utils import bag_of_words, tokenize
 
 
 device = torch.device('cuda' if torch.cuda.is_available()  else 'cpu')
-with open("intents.json",'r') as f:
+with open("questions.json",'r') as f:
     intents = json.load(f)
 
 file = "data.pth"
