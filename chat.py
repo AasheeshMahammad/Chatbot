@@ -16,6 +16,7 @@ all_words = data["all_words"]
 tags = data["tags"]
 model_state = data["model_state"]
 
+
 model = NeuralNet(input_size, hidden_size, output_size).to(device)
 model.load_state_dict(model_state)
 model.eval()
@@ -34,6 +35,7 @@ while True:
 
     output = model(x)
     _, predicted = torch.max(output, dim=1)
+    #predicted=="agree" or predicted=="disagree" do something else
     tag = tags[predicted.item()]
     probs = torch.softmax(output, dim=1)
     prob = probs[0][predicted.item()]
