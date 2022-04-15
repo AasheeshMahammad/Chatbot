@@ -60,9 +60,10 @@ def book_appointment():
     clear_screen(5)
     print(f"{bot_name}: Hi Welcome to appointment Booking Section")
     loc = Nominatim(user_agent="GetLoc")
-    print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers")
-    print("User:",end=' ')
+    print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers. enter quit to quit")
+    print("U: ",end=' ')
     lc = input()
+    if lc.lower()=="quit": exit(0)
     getLoc = loc.geocode(lc)
     latitude = getLoc.latitude
     longitude = getLoc.longitude
@@ -94,7 +95,7 @@ if __name__=="__main__":
     autCorrect = AutoCorrect(all_words)
     while ded==False and quits==False:
         print()
-        sentence = input("U : ").lower()
+        sentence = input("U: ").lower()
         if sentence == "quit":
             quits=True
             break
@@ -118,7 +119,7 @@ if __name__=="__main__":
             all_prev_tags=[]
             all_prev_probs=[]
             d1={}
-        else:
+        elif tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]:
             all_prev_tags.append(predicted)
             all_prev_probs.append(fina_prob) 
         print("Tag decided now is :",tag,"Prob of which is :",fina_prob)    
@@ -127,7 +128,7 @@ if __name__=="__main__":
                 if tag == intent["tag"]:
                     if(tag not in d1 ):
                         picks=random.choice(intent['responses'])
-                        if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment"]):
+                        if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]):
                             d1[tag]=[picks]
                         print(f"{bot_name}: {picks}")
                     else:                    
@@ -144,7 +145,7 @@ if __name__=="__main__":
                                 exit(0)
                         else:
                             picks=random.choice(intent['responses'])
-                            if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment"]):
+                            if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]):
                                 while(len(d1[tag])<5 and picks in d1[tag]):
                                     picks=random.choice(intent['responses'])
                                 d1[tag].append(picks)

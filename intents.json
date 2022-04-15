@@ -308,6 +308,18 @@
           "Free up Resources Windows 10 through System Configuration" ,
           "Enable Battery saver on your device which prevents unnecessary app from starting up automatically." 
         ]
+      },
+      {
+        "tag":"none",
+        "patterns":[
+          "dhbfdvbieneqnvbiewvfbjkbfAVKBABHVWYTCDUWDVKVVbbjcvfekvbeb",
+          "qweytfyuuoiuoppafhjfllgjhjzcbnxmmz",
+          "asdgfhjkjlzcxvbnm",
+          "zxvccnmbcx",
+          "asdfghjkl",
+          "qwertyuiop"
+        ],
+        "responses":["Please rephrase"]
       }
     ]
   }
