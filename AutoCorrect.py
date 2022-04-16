@@ -1,3 +1,6 @@
+from json import load
+from utils import tokenize
+
 class AutoCorrect:
     def __init__(self, collection):
         self.collection = collection
@@ -23,7 +26,7 @@ class AutoCorrect:
             ratio = 0
         return ratio
 
-    def correctWord(self, word, threshold=0.45):
+    def correctWord(self, word, threshold=0.35):
         word = word.lower()
         maxSimilarity = 0.0
         mostSimilarWord = word
@@ -32,7 +35,21 @@ class AutoCorrect:
             if curSim > maxSimilarity:
                 maxSimilarity = curSim
                 mostSimilarWord = data
-        if maxSimilarity > threshold:
+        if maxSimilarity >= threshold:
             return mostSimilarWord
         else:
             return word
+
+def get_data():
+    with open("intents.json") as file:
+        intents = load(file)
+    all_words = []
+    for intent in intents["intents"]:
+        for pattern in intent["patterns"]:
+            w = tokenize(pattern)
+            all_words.extend(w)
+    for i in range(len(all_words)):
+        all_words[i] = all_words[i].lower()
+    all_words = list(set(all_words))
+    all_words.sort()
+    return all_words

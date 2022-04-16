@@ -1,5 +1,5 @@
 import random, json, torch
-from AutoCorrect import AutoCorrect
+from AutoCorrect import AutoCorrect,get_data
 from model import NeuralNet
 from utils import bag_of_words, tokenize, insertdb
 from geopy.geocoders import Nominatim
@@ -92,7 +92,7 @@ if __name__=="__main__":
     all_prev_probs=[]
     quits=False
     print("type quit to exit")
-    autCorrect = AutoCorrect(all_words)
+    autCorrect = AutoCorrect(get_data())
     while ded==False and quits==False:
         print()
         sentence = input("U: ").lower()
