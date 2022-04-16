@@ -4,7 +4,8 @@ from nltk.corpus import words
 
 class AutoCorrect:
     def __init__(self):
-        self.collection = getData().extend(words.words())
+        self.collection = getData()
+        self.collection.extend(words.words())
 
     def create_pairs(self, word):
         if len(word) <= 1:
