@@ -1,13 +1,15 @@
 from json import load
 from utils import tokenize
+from nltk.corpus import words
 
 class AutoCorrect:
-    def __init__(self, collection):
-        self.collection = collection
+    def __init__(self):
+        self.collection = words.words()
+        self.collection.extend(get_data())
 
     def create_pairs(self, word):
         if len(word) <= 1:
-            return word
+            return [word]
         pairs = [word[i] + word[i+1] for i in range(len(word)-1)]
         return pairs
 
@@ -26,7 +28,7 @@ class AutoCorrect:
             ratio = 0
         return ratio
 
-    def correctWord(self, word, threshold=0.35):
+    def correctWord(self, word, threshold=0.55):
         word = word.lower()
         maxSimilarity = 0.0
         mostSimilarWord = word
@@ -48,6 +50,10 @@ def get_data():
         for pattern in intent["patterns"]:
             w = tokenize(pattern)
             all_words.extend(w)
+        if "responses" in intent:
+            for response in intent["responses"]:
+                w = tokenize(response)
+                all_words.extend(w)
     for i in range(len(all_words)):
         all_words[i] = all_words[i].lower()
     all_words = list(set(all_words))
