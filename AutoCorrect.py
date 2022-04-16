@@ -4,8 +4,8 @@ from nltk.corpus import words
 
 class AutoCorrect:
     def __init__(self):
-        self.collection = words.words()
-        self.collection.extend(get_data())
+        self.collection = getData()
+        self.collection.extend(words.words())
 
     def create_pairs(self, word):
         if len(word) <= 1:
@@ -42,7 +42,7 @@ class AutoCorrect:
         else:
             return word
 
-def get_data():
+def getData():
     with open("intents.json") as file:
         intents = load(file)
     all_words = []
