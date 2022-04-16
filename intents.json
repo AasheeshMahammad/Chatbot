@@ -91,7 +91,21 @@
           "How to stop my laptop from overheating" ,
           "What to Do if Your Laptop Is Overheating?" ,
           "My laptop's getting overheated. What should I do about it?" ,
-          "Ways To Deal With Your Overheating Laptop" 
+          "Ways To Deal With Your Overheating Laptop" ,
+          "What is causing my laptop to overheat so much?",
+          "How can I keep my laptop from getting too hot?",
+          "How can I keep my laptop from heating up?",
+          "How can I keep my laptop from burning up?",
+          "How can I avoid my laptop from getting hot?",
+          "How can I prevent my laptop from overheating?",
+          "What Should You Do If Your Laptop Overheats?",
+          "What Should You Do If Your Computer Overheats?",
+          "What Should You Do If Your Computer Heats up?",
+          "What Should You Do If Your Computer Gets very hot?",
+          "What Should You Do If Your Computer Gets too hot?",
+          "My laptop is getting too hot. What should I do in this situation?",
+          "My laptop is heating up. What can I do in this situation?",
+          "My laptop is overheating. What can I do in this scenario?"
         ],
         "responses":[
           "Change your laptop's power settings from High Performance to a Balanced or Power Saver plan. This tweak will tell the system only to use the power required to run your applications rather than always using the maximum processor speed. If you need to play games or other intensive work, you can switch back to the high-performance plan as required. This can be done by customising power plan from your settings", 
@@ -108,7 +122,21 @@
           "How to Fix a Slow Computer" ,
           "Slow laptop? How to make it faster",
           "How to Troubleshoot Your Slow Laptop",
-          "My computer lags too much."
+          "My computer lags too much.",
+          "What is the cause of my laptop's slowness, and how can I fix it?",
+          "What is the reason for my laptop's lag, and how can I solve it?",
+          "How to Improve the Performance of a Slow Computer",
+          "How to Improve the Efficiency of a Slow Computer",
+          "My laptop is slow. What can you do to make it go faster?",
+          "My pc seems slow. How can you do to make it work faster?",
+          "How to Fix My Sluggish Laptop",
+          "How to Fix My Painfully slow Laptop",
+          "How to Improve My Painfully slow Laptop",
+          "How to Improve My Stagnant Pc",
+          "My PC is quite sluggish.",
+          "My Laptop is quite laggy.",
+          "My Laptop is very clunky."
+
         ],
         "responses":[
           "Scan Your laptop for any types of malware, virus attacks.", 
@@ -123,7 +151,17 @@
         "patterns":[
           "How to troubleshoot a faulty laptop screen", 
           "How do I fix my laptop screen without replacing it?", 
-          "My laptop screen is damaged. What should I do?" 
+          "My laptop screen is damaged. What should I do?" ,
+          "How to Repair a Faulty Laptop Display",
+          "How to Fix a Defective Laptop Display",
+          "How to Restore a Leaky Laptop Display",
+          "How do I fix a Leaky Laptop Display",
+          "How do I fix a Flawed Laptop Display",
+          "How can I repair my laptop screen without having to replace it?",
+          "How can I fix my computer monitor without replacing it?",
+          "How can I restore my computer monitor without replacing it?",
+          "How do I repair my screen without having to replace it?",
+          "My laptop's screen has been shattered. So, what should I do now?"
         ],
         "responses":[
           "Update your graphics driver. An outdated graphics driver could prevent the screen from displaying correctly.", 
@@ -140,7 +178,25 @@
           "How do I fix my unresponsive touchpad?", 
           "How do I get my touchpad working again? ",
           "How do I unfreeze my touchpad? ",
-          "Why is my laptop mouse touchpad not working?" 
+          "Why is my laptop mouse touchpad not working?" ,
+          "My touchpad isn't working",
+          "My touchpad isn't working properly.",
+          "My touchpad is not really working correctly.",
+          "My touchpad isn't running normally.",
+          "How do I fix my touchpad that isn't responding?",
+          "How do I fix my trackpad that isn't responding?",
+          "How do I repair my trackpad that's not responding?",
+          "How do I restore my trackpad which is not responding?",
+          "Can you tell me how to get my touchpad to work again?",
+          "Could you tell me how to get my trackpad to function again?",
+          "How do I get my touchpad to unfreeze?",
+          "My touchpad is frozen",
+          "My trackpad froze",
+          "How come the touchpad on my laptop isn't working?",
+          "How come the touchpad on my pc isn't working?",
+          "How come the touchpad on my pc is still not working?",
+          "How come the touchpad on my computer is still not working?"
+
         ],
         "responses":[
           "Confirm that the trackpad is connected correctly. If you use a touchpad that connects through USB, check that both ends of the connecting cable are fully plugged in. ",
@@ -157,7 +213,21 @@
           "How to Fix Screen Flickering and Flashing" ,
           "My eyes hurt while using laptop.",
           "My Laptop Screen Flashes too much" ,
-          "5 Best Ways to Fix Screen Flickering on Windows 10" 
+          "5 Best Ways to Fix Screen Flickering on Windows 10",
+          "In Windows, troubleshoot screen flickering" ,
+          "In Windows, fix screen flickering",
+          "In Windows, fix screen flashing",
+          "In Pc, fix screen flashing",
+          "In Pc, repair screen flicker",
+          "How to Get Rid of Flickering and Flashing on Your Screen",
+          "What to Do to get Rid of Flickering and Flashing on Your Display",
+          "What to Do to get Rid of Flickering and Flashing on My Display",
+          "When I use my laptop, my eyes hurt.",
+          "When I use my computer, my eyes hurt.",
+          "When I use my computer, my head hurts.",
+          "My laptop's screen flashes excessively",
+          "My laptop's screen flashes abnormally",
+          "My computer's screen flashes abnormally"
         ],
         "responses":[
           "Check to see whether the Task Manager flickers. Turn your computer on, and wait for the desktop to load." ,
@@ -174,7 +244,20 @@
           "How to Fix Audio Not Working On Your Laptop" ,
           "Laptop Speakers Not Working" ,
           "What to do if my laptop's sound isn't working", 
-          "Unable to hear anything from my laptop or pc" 
+          "Unable to hear anything from my laptop or pc" ,
+          "Fix the sound issues",
+          "Fix my pc's sound issues",
+          "How to Fix Your Laptop's Audio Problem",
+          "How Do I Fix My Laptop's Audio Problem?",
+          "How Would I Fix My Computer's Audio Issue?",
+          "The Speakers on My Laptop Aren't Working",
+          "The Speakers of My Computer Aren't Working",
+          "The Speakers of My Computer Aren't Functioning",
+          "What should I do if the sound on my laptop stops working?",
+          "What should I do if the sound on my computer stops functioning?",
+          "What should I do if the audio on my computer stops functioning?",
+          "I can't hear anything from my laptop or computer.",
+          "I can't hear anything at all from my laptop."
         ],
         "responses":[
           "Make sure your sound isn't muted. Laptops often include a mute button or shortcut you may have accidentally pushed, and you can also mute by clicking the speaker icon in the Windows system tray." ,
@@ -190,7 +273,19 @@
           "Why do some keys on my laptop keyboard not work? ",
           "How do I fix unresponsive keyboard keys?" ,
           "Laptop keyboard not working? ",
-          "How to Fix Laptop Keyboard When It Stops Working" 
+          "How to Fix Laptop Keyboard When It Stops Working" ,
+          "How come some of the keys on my laptop keyboard aren't working?",
+          "How come some of the keys on my computer keyboard aren't operating?",
+          "Why a few of the buttons on my key board aren't operating?",
+          "Why come a few of the buttons on my key board aren't working?",
+          "How can I fix keyboard keys that aren't responding?",
+          "How do I fix keyboard that isn't responding?",
+          "The keyboard on my laptop isn't working.",
+          "The keyboard on my computer isn't working.",
+          "The keyboard on my laptop is not working.",
+          "The keyboard on my computer is not working.",
+          "The keyboard on my notebook is not working.",
+          "How to Restore the Functioning of a Laptop Keyboard"
         ],
         "responses":[
           "Restart your computer. Occasionally, errors can happen in drivers, firmware, or software that will clear out when you restart your computer. Once you've restarted, check your keyboard to see if it is responding. ",
@@ -205,7 +300,16 @@
         "patterns":[
           "How to Fix a Computer That Turns On and Then Off ",
           "Why does my computer power on and then immediately turns off", 
-          "PC turns ON and then OFF in a matter of seconds" 
+          "PC turns ON and then OFF in a matter of seconds" ,
+          "How to Troubleshoot a Computer That Turns On and Off",
+          "How to Troubleshoot a Laptop Which Goes On and Off",
+          "How to Troubleshoot a Pc Which Turns On and Off",
+          "What causes my computer to switch on and then turn off?",
+          "What causes my computer to turn on and then switch off?",
+          "What causes my computer to power on and then power off?",
+          "What causes my laptop to power on and then power off?",
+          "In a matter of seconds, the computer turns on and then turns off.",
+          "In a matter of seconds, the laptop turns on and then turns off."
         ],
         "responses":[
           "Troubleshoot the cause of the beep code, assuming you're lucky enough to hear one. A beep code will give you an excellent idea of exactly where to look for the cause of your computer turning off. ",
@@ -221,7 +325,15 @@
           "How to Fix a Windows Blue Screen of Death",
           "How to deal with Blue Screen of Death woes in Windows" ,
           "My pc or laptop is showing a blue screen." ,
-          "Recover from BSOD" 
+          "Recover from BSOD" ,
+          "How to Recover from a Blue Screen of Death in Windows",
+          "How to Return from a Blue Screen of Death in Windows",
+          "How to Handle the Blue Screen of Death in Windows",
+          "There's a blue screen on my laptop.",
+          "There's a blank screen on my laptop.",
+          "There's a blank screen on my computer.",
+          "There's a blank screen on my pc.",
+          "There's a blue screen on my notebook."
         ],
         "responses":[
           "The most important Blue Screen of Death troubleshooting step you can take is to ask yourself what you did just before the device stopped working. Undo the change you made and test again for the STOP Error. Try updating BIOS again. ",
@@ -237,7 +349,18 @@
           "What to do when your laptop battery won't charge ",
           "Why the battery is not charging when it is plugged in? ",
           "How to Fix a Laptop That Won't Charge" ,
-          "laptop Plugged In but not Charging" 
+          "laptop Plugged In but not Charging" ,
+          "How to deal with a laptop battery that won't charge",
+          "How to deal with a computer battery which won't charge",
+          "How come the battery doesn't charge when it's plugged in?",
+          "How come the battery doesn't start charging when it's plugged in?",
+          "How to Repair a Non-Charging Laptop",
+          "How to Recharge a Laptop That Isn't Charging",
+          "How to Charge a Laptop That Isn't Charging",
+          "It's plugged in, but it's not charging",
+          "My laptop is plugged in, but it isn't charging.",
+          "My pc is plugged in, but it's not charging.",
+          "This pc is connected, but it's not charging."
         ],
         "responses":[
           "Check the wattage of the charger that came with your laptop—if it came with a 45W charger, you'll probably want to stick with a 45W charger (or higher) to power it, and so on. A lower-wattage charger might keep the battery from draining while you use it, but it won't be enough to charge it any higher.", 
@@ -253,7 +376,18 @@
           "How to Fix a Computer That Won't Start in Safe Mode ",
           "Can't boot Win 10 Safe Mode ",
           "Unable to boot windows 10 or get in to safe mode" ,
-          "Fix can't Enter Safe Mode in Windows 10" 
+          "Fix can't Enter Safe Mode in Windows 10" ,
+          "How to Troubleshoot a Computer That Won't Boot in Safe Mode",
+          "How to Restart a Computer in Safe Mode",
+          "How to Start a Laptop in Safe Mode",
+          "Windows 10 Safe Mode will not start",
+          "Windows 10 will not start in Safe Mode",
+          "Laptop can not start in Safe Mode",
+          "Laptop cannot start in Safe Mode",
+          "I'm unable to enter safe mode.",
+          "I'm unable to access recovery mode.",
+          "I'm not able to access recovery mode.",
+          "Fixing Windows 10's Inability to Enter Safe Mode"
         ],
         "responses":[
           "Try to start Windows in every startup method available.",
