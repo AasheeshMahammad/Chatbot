@@ -1,5 +1,5 @@
 import random, json, torch
-from AutoCorrect import AutoCorrect,get_data
+from AutoCorrect import AutoCorrect
 from model import NeuralNet
 from utils import bag_of_words, tokenize, insertdb
 from geopy.geocoders import Nominatim
