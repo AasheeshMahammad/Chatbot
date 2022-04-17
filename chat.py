@@ -74,9 +74,12 @@ def book_appointment():
     print(f"{bot_name}: Appointment confirmed at",choosen["title"])
     name = input(f"{bot_name}: Enter your name: ")
     lapname = input(f"{bot_name}: Enter Laptop name and model: ")
-    problem = input(f"{bot_name}: Describe your problem in not more than 300 words:\n")
+    problem = input(f"{bot_name}: Describe your problem in not more than 300 words (optional):\nU: ")
+    while len(problem)>300:
+        print(f"{bot_name}: Description Too lengthy. Please restrict it to less than 300 words:")
+        problem = input("U: ")
     insertdb(name,lapname,problem,choosen['title'],choosen['address']['label'])
-    print(f"{bot_name}: Thanks for the info, your issue has been reported.\nYour appointment is booked at {choosen['title']} for tomorrow.")
+    print(f"{bot_name}: Thanks for the info, your issue has been reported.\nYour appointment is booked at {choosen['title']},{choosen['address']['district']} for tomorrow.")
     exit(0)
 
 if __name__=="__main__":
