@@ -154,10 +154,11 @@ if __name__=="__main__":
                         quit = False
                         continue
                 else:
-                    if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]):
-                        while(len(d1[tag])<5 and picks in d1[tag]):
-                            picks=random.choice(intent['responses'])
-                        d1[tag].append(picks)
+                    picks=random.choice(intent['responses'])
+                    while(len(d1[tag])<5 and picks in d1[tag]):
+                        picks=random.choice(intent['responses'])
+                    d1[tag].append(picks)
+                    print(f"{bot_name}: {picks}")
 
             else:
                 if tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]:
