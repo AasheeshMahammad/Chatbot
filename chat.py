@@ -72,7 +72,7 @@ def book_appointment():
     longitude = getLoc.longitude
     choosen=locations(latitude,longitude,lc)
     print(f"{bot_name}: Appointment confirmed at",choosen["title"])
-    name = input(f"{bot_name}: Enter your first name: ")
+    name = input(f"{bot_name}: Enter your name: ")
     lapname = input(f"{bot_name}: Enter Laptop name and model: ")
     problem = input(f"{bot_name}: Describe your problem in not more than 300 words:\n")
     insertdb(name,lapname,problem,choosen['title'],choosen['address']['label'])
