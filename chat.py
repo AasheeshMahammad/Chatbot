@@ -135,7 +135,7 @@ if __name__=="__main__":
                     continue
 
             #if answer not accepted or question is repeated
-            elif asked==True and (tag=="disagree" or (len(all_prev_tags)>0 and tag==tags[all_prev_tags[-1].item()] and tag in d1)):
+            elif asked==True and (tag=="disagree" or (len(all_prev_tags)>0 and tag in d1)):
                 
                 predicted=all_prev_tags[-1]
                 tag=tags[predicted.item()]
