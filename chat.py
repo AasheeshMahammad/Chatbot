@@ -86,7 +86,6 @@ if __name__=="__main__":
     all_words = data["all_words"]
     tags = data["tags"]
     model_state = data["model_state"]
-    ded=False
     model = NeuralNet(input_size, hidden_size, output_size).to(device)
     model.load_state_dict(model_state)
     model.eval()
@@ -96,14 +95,19 @@ if __name__=="__main__":
     quits=False
     print(f"{bot_name}: Hi!\nI'm {bot_name}!\nI might be able to solve your problem with your laptop.\nAsk a question or type 'quit' to exit")
     autCorrect = AutoCorrect()
-    while ded==False and quits==False:
+
+    asked = False
+
+    while quits==False:
         print()
         #start
         sentence = input("U: ").lower()
         if sentence == "quit":
             quits=True
-            print("Thank You! Have a great day!")
+            print(f"{bot_name}: Thank You! Have a great day!")
             break
+
+        #calculate tag
         sentence = tokenize(sentence)
         sentence = [autCorrect.correct_word(word) for word in sentence]
         x = bag_of_words(sentence,all_words)
@@ -111,61 +115,79 @@ if __name__=="__main__":
         x = torch.from_numpy(x).to(device)
         output = model(x)
         _, predicted = torch.max(output, dim=1)   
-        tag = tags[predicted.item()]
+        tag = tags[predicted.item()]        #predicted tag
         probs = torch.softmax(output, dim=1)
         prob = probs[0][predicted]
-        fina_prob=prob.item()
+        fina_prob=prob.item()       #final probability of predicted tag
 
         print(tag)
-        
-        if(tag=="disagree" and len(all_prev_tags)>0):
-            predicted=all_prev_tags[-1]
-            tag=tags[predicted.item()]
-            fina_prob=all_prev_probs[-1]
-        elif(tag=="agree" or tag=="thanks"):
-            all_prev_tags=[]
-            all_prev_probs=[]
-            d1={}
-        elif tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]:
-            all_prev_tags.append(predicted)
-            all_prev_probs.append(fina_prob)
-        print("Tag decided now is :",tag,"Prob of which is :",fina_prob)
-        #check for valid question
+
         if fina_prob > 0.44:
-            for intent in intents["intents"]:
-                if tag == intent["tag"]:
-                    #if the question isn't asked before
-                    if(tag not in d1 ):
+
+            if tag=="appointment":
+                print("Looks like you need an appointment. Type yes to confirm, anything else to retry.")
+                ap = input("U :").lower()
+                if(ap=="yes"):
+                    print("Taking you to a service center appointment part...")                                                      
+                    book_appointment()
+                else:
+                    print(f"{bot_name}: Ask me a question.")
+                    continue
+
+            #if answer not accepted or question is repeated
+            elif (tag=="disagree" and asked==True) or (tag==tags[all_prev_tags[-1].item()] and tag in d1):
+                
+                predicted=all_prev_tags[-1]
+                tag=tags[predicted.item()]
+                fina_prob=all_prev_probs[-1]
+                if(len(d1[tag])==5):
+                #if all responses are exhausted then do this:
+                    quit=True
+                    print(f"{bot_name}: All possible solutions have been tried.\nType 'yes' to go ahead to book an appoinment, anything else to continue.")
+                    print("U :",end=' ')
+                    ch=input().lower()
+                    if(ch=="yes"):
+                        print("Taking you to a service center appointment part...")                                                      
+                        book_appointment()
+                    else:
+                        print("Maybe I can help you with any other problem that your laptop is facing. Ask your query.")
+                        quit = False
+                        continue
+
+            else:
+                if tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]:
+                    all_prev_tags.append(predicted)
+                    all_prev_probs.append(fina_prob)
+
+                #search for responses for a given tag
+                for intent in intents["intents"]:
+                    if tag == intent["tag"]: 
+                        #if the question isn't asked before
                         picks=random.choice(intent['responses'])
-                        if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]):
-                            d1[tag]=[picks]
-                        print(f"{bot_name}: {picks}")
-                    else: #if the response to previous question wasn't satisfactory
-                        if(len(d1[tag])==5):
-                        #if all responses are exhausted then do this:
-                            ded=True
-                            print(f"{bot_name}: All possible solutions have been tried.\nType 'yes' to go ahead to book an appoinment, anything else to continue.")
-                            print(f"{bot_name}: Enter Yes or No only")
-                            print("U :",end=' ')
-                            ch=input().lower()
-                            if(ch=="yes"):
-                                print("Taking you to a service center appointment part...")                                                      
-                                book_appointment()
-                            else:
-                                exit(0)
-                        else:
-                            picks=random.choice(intent['responses'])
+                        if(tag not in d1 ):
+                            if(tag=="agree" or tag=="thanks") and asked==True:
+                                asked = False
+                                all_prev_tags=[]
+                                all_prev_probs=[]
+                                d1={}
+                            elif(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]):
+                                d1[tag]=[picks] #add to previously given responses
+                                asked = True
+
+                        else: #if question is repeated
                             if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]):
                                 while(len(d1[tag])<5 and picks in d1[tag]):
                                     picks=random.choice(intent['responses'])
                                 d1[tag].append(picks)
-                            print(f"{bot_name}: {picks}")
-                    if(tag in ["goodbye","thanks"]):
-                        quits=True
-                else: continue
+
+                        print(f"{bot_name}: {picks}")
+                        if(tag=="goodbye"):
+                            quits=True
+                        break
+                    else: continue
         else:
-            #if query isnt stringly matching any tag then do this:
-            ded=True
+            quits = True
+            #if query isnt strictly matching with any tag then do this:
             print(f"{bot_name}: No solution found for your query.\nType 'yes' to go ahead to book an appoinment, anything else to continue.")
             print("U :",end=' ')
             ch=input().lower()
@@ -173,9 +195,6 @@ if __name__=="__main__":
                 print("Taking you to a service center appointment part...")                                                      
                 book_appointment() 
             else:
-                ded = False
+                quits = False
                 continue      
-
-    if(quits==False):
-        book_appointment()
-
+            
