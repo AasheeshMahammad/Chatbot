@@ -10,6 +10,7 @@ from model import NeuralNet
 
 df = "intents.json"
 init_db()
+print("Preprocessing data...")
 with open(df) as file:
     intents = json.load(file)
 
@@ -69,7 +70,7 @@ model = NeuralNet(input_size, hidden_size, output_size).to(device)
 
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
+print("Training the model...")
 for epoch in range(epochs):
     for words, labels in train_loader:
         words = words.to(device)
