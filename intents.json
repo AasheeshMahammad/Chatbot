@@ -60,7 +60,7 @@
       },
       {
         "tag": "agree",
-        "patterns": ["It works","fine","ok","sure","ill try"],
+        "patterns": ["It works","fine","ok","sure","ill try","Solves the problem","the problem is fixed","nice","done","should do the job","yes this works"],
         "responses": ["So anything else?"]
       },
       {
@@ -76,7 +76,14 @@
           "no change",
           "the issue isnt getting solved",
           "Nothing seems to be working",
-          "any other way"
+          "any other way",
+          "still the same", 
+          "The problem is not being resolved.", 
+          "No change, I don't believe it works.",
+          "provide me with another solution.",
+          "The issue has not been addressed.",
+          "Please come up with a different solution for me.",
+          "The problem isn't being dealt with."
         ]
       },
       {
@@ -89,9 +96,25 @@
           "I dont know how to do it",
           "I dont know what to do",
           "I dont want to talk to you",
-          "I had enough of this"
+          "I had enough of this",
+          "No none of these work i want to go fix it in person",
+          "Can i get it fixed in person",
+          "I am done chatting with you but still need a solution",
+          "Any way of talking to a human directly",
+          "Is it possible for me to schedule an appointment?",
+          "I'd like to schedule an appointment.",
+          "I'm looking for someone to service my laptop, and I need to talk to the service person. I'm not sure how to do it, or what to do, and I don't want to talk to you.",
+          "No, none of these work for me, I'd rather go fix it myself.",
+          "Can I get it corrected in person? I've finished talking to you, but I'm still looking for a solution.",
+          "Any technique to communicate directly with a human",
+          "Is it feasible for me to make a reservation?",
+          "I'm seeking for someone to repair my laptop, and I'd like to speak with the technician. I'm not sure how to proceed or what to do, and I'm not interested in speaking with you.",
+          "No, none of these options appeal to me; I'd rather go ahead and fix it by someone else.",
+          "Is it possible for me to have it fixed by a human? I've wrapped up my conversation with you, but I'm still looking for a solution.",
+          "Any method of communicating with a person directly.",
+          "Any means of directly connecting with a person."
         ],
-        "responses":["Would You Like to go ahead to book an appointment at a Service Centre?\nEnter Yes or No only: "]
+        "responses":[]
       },
       {
         "tag":"laptop overheating",
