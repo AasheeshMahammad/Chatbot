@@ -153,6 +153,11 @@ if __name__=="__main__":
                         print(f"{bot_name}: Maybe I can help you with any other problem that your laptop is facing. Ask your query.")
                         quit = False
                         continue
+                else:
+                    if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]):
+                        while(len(d1[tag])<5 and picks in d1[tag]):
+                            picks=random.choice(intent['responses'])
+                        d1[tag].append(picks)
 
             else:
                 if tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]:
