@@ -30,7 +30,7 @@ def init_db():
 def insertdb(name,lapname,problem,servcentre,servaddr):
     conn = sqlite3.connect('log.db')
     cur = conn.cursor()
-    cur.execute(f"INSERT INTO INFO VALUES ('{name}','{lapname}','{servcentre}','{problem}','{servaddr}', DATE('now','+1 day'))")
+    cur.execute(f"INSERT INTO INFO VALUES ('{name}','{lapname}','{problem}','{servcentre}','{servaddr}', DATE('now','+1 day'))")
     conn.commit()
     conn.close()
 
