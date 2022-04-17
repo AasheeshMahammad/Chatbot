@@ -54,12 +54,12 @@ class ChatDataset(Dataset):
     def __len__(self):
         return self.n_samples
     
-batch_size = 8
+batch_size = 80
 input_size = len(all_words)
-hidden_size = 8
+hidden_size = 2*input_size
 output_size = len(tags)
-learning_rate = 0.001
-epochs = 1000
+learning_rate = 0.00001
+epochs = 1500
 
 dataset = ChatDataset()
 train_loader = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=True)
