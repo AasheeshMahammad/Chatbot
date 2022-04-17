@@ -135,7 +135,7 @@ if __name__=="__main__":
                     continue
 
             #if answer not accepted or question is repeated
-            elif asked==True and (tag=="disagree" or (len(all_prev_tags)>0 and tag in d1)):
+            elif asked==True and (tag=="disagree"):
                 
                 predicted=all_prev_tags[-1]
                 tag=tags[predicted.item()]
@@ -150,6 +150,7 @@ if __name__=="__main__":
                         print(f"{bot_name}: Taking you to a service center appointment part...")                                                      
                         book_appointment()
                     else:
+                        print()
                         print(f"{bot_name}: Maybe I can help you with any other problem that your laptop is facing. Ask your query.")
                         quit = False
                         continue
@@ -181,10 +182,26 @@ if __name__=="__main__":
                                 asked = True
 
                         else: #if question is repeated
-                            if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]):
-                                while(len(d1[tag])<5 and picks in d1[tag]):
-                                    picks=random.choice(intent['responses'])
-                                d1[tag].append(picks)
+                            if(len(d1[tag])==5):
+
+                                quit=True
+                                print(f"{bot_name}: All possible solutions have been tried.\nType 'yes' to go ahead to book an appoinment, anything else to continue.")
+                                print("U :",end=' ')
+                                ch=input().lower()
+                                if(ch=="yes"):
+                                    print(f"{bot_name}: Taking you to a service center appointment part...")                                                      
+                                    book_appointment()
+                                else:
+                                    print()
+                                    print(f"{bot_name}: Maybe I can help you with any other problem that your laptop is facing. Ask your query.")
+                                    quit = False
+                                    continue
+                                #if all responses are exhausted then do this:
+                            else :
+                                if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]):
+                                    while(len(d1[tag])<5 and picks in d1[tag]):
+                                        picks=random.choice(intent['responses'])
+                                    d1[tag].append(picks)
 
                         print(f"{bot_name}: {picks}")
                         if(tag=="goodbye"):
