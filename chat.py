@@ -170,7 +170,6 @@ if __name__=="__main__":
                 for intent in intents["intents"]:
                     if tag == intent["tag"]: 
                         #if the question isn't asked before
-                        picks=random.choice(intent['responses'])
                         if(tag not in d1 ):
                             if(tag=="agree" or tag=="thanks") and asked==True:
                                 asked = False
@@ -178,8 +177,10 @@ if __name__=="__main__":
                                 all_prev_probs=[]
                                 d1={}
                             elif(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]):
+                                picks=random.choice(intent['responses'])
                                 d1[tag]=[picks] #add to previously given responses
                                 asked = True
+                                print(f"{bot_name}: {picks}")
 
                         else: #if question is repeated
                             if(len(d1[tag])==5):
@@ -202,8 +203,8 @@ if __name__=="__main__":
                                     while(len(d1[tag])<5 and picks in d1[tag]):
                                         picks=random.choice(intent['responses'])
                                     d1[tag].append(picks)
+                                    print(f"{bot_name}: {picks}")
 
-                        print(f"{bot_name}: {picks}")
                         if(tag=="goodbye"):
                             quits=True
                         break
