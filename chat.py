@@ -100,7 +100,7 @@ if __name__=="__main__":
             quits=True
             break
         sentence = tokenize(sentence)
-        sentence = [autCorrect.correctWord(word) for word in sentence]
+        sentence = [autCorrect.correct_word(word) for word in sentence]
         x = bag_of_words(sentence,all_words)
         x = x.reshape(1,x.shape[0])
         x = torch.from_numpy(x).to(device)
