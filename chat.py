@@ -181,7 +181,10 @@ if __name__=="__main__":
                                 d1[tag]=[picks] #add to previously given responses
                                 asked = True
                                 print(f"{bot_name}: {picks}")
-
+                            elif tag in ["greeting","goodbye","funny","thanks","filler","none"]:
+                                picks=random.choice(intent['responses'])
+                                print(f"{bot_name}: {picks}")
+                            else: print(f"{bot_name}: I don't understand. Could you please rephrase that?")
                         else: #if question is repeated
                             if(len(d1[tag])==5):
 
