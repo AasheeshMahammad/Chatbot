@@ -46,7 +46,7 @@ def locations(latitude,longitude,lc):
     while(True):
         data=show_locs(latitude,longitude,limit)
         print(f"{bot_name}: Enter choice between 1-{len(data)} to confirm your appoinment at that service center any other number to show 2 more centers which might be closer to your location")
-        print("User:",end=' ')
+        print("U: ",end=' ')
         choice=int(input())
         if(choice>0 and choice<=len(data)):
             return data[choice-1]            
@@ -56,7 +56,7 @@ def locations(latitude,longitude,lc):
             print(f"{bot_name}: Hi Welcome to appointment Booking Section")
             loc = Nominatim(user_agent="GetLoc")
             print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers")
-            print("User:",lc)
+            print("U: ",lc)
     
 
 def book_appointment():
@@ -125,10 +125,10 @@ if __name__=="__main__":
         if fina_prob > 0.44:
 
             if tag=="appointment":
-                print("Looks like you need an appointment. Type yes to confirm, anything else to retry.")
-                ap = input("U :").lower()
+                print(f"{bot_name}: Looks like you need an appointment. Type yes to confirm, anything else to retry.")
+                ap = input("U: ").lower()
                 if(ap=="yes"):
-                    print("Taking you to a service center appointment part...")                                                      
+                    print(f"{bot_name}: Taking you to a service center appointment part...")                                                      
                     book_appointment()
                 else:
                     print(f"{bot_name}: Ask me a question.")
@@ -147,10 +147,10 @@ if __name__=="__main__":
                     print("U :",end=' ')
                     ch=input().lower()
                     if(ch=="yes"):
-                        print("Taking you to a service center appointment part...")                                                      
+                        print(f"{bot_name}: Taking you to a service center appointment part...")                                                      
                         book_appointment()
                     else:
-                        print("Maybe I can help you with any other problem that your laptop is facing. Ask your query.")
+                        print(f"{bot_name}: Maybe I can help you with any other problem that your laptop is facing. Ask your query.")
                         quit = False
                         continue
 
@@ -192,9 +192,8 @@ if __name__=="__main__":
             print("U :",end=' ')
             ch=input().lower()
             if(ch=="yes"):
-                print("Taking you to a service center appointment part...")                                                      
+                print(f"{bot_name}: Taking you to a service center appointment part...")                                                      
                 book_appointment() 
             else:
                 quits = False
                 continue      
-            
