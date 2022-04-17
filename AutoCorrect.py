@@ -4,7 +4,7 @@ from nltk.corpus import words
 
 class AutoCorrect:
     def __init__(self):
-        self.collection = getData()
+        self.collection = get_data()
         self.collection.extend(words.words())
 
     def create_pairs(self, word):
@@ -28,7 +28,7 @@ class AutoCorrect:
             ratio = 0
         return ratio
 
-    def correctWord(self, word, threshold=0.55):
+    def correct_word(self, word, threshold=0.55):
         word = word.lower()
         maxSimilarity = 0.0
         mostSimilarWord = word
@@ -42,7 +42,7 @@ class AutoCorrect:
         else:
             return word
 
-def getData():
+def get_data():
     with open("intents.json") as file:
         intents = load(file)
     all_words = []
