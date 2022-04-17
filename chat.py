@@ -13,6 +13,8 @@ with open("intents.json",'r') as f:
 file = "data.pth"
 data = torch.load(file)
 
+bot_name = "Mr.Rebot"
+
 def clear_screen(duration):
     sleep(duration)
     os.system('cls')
@@ -39,17 +41,18 @@ def show_locs(latitude,longitude,limit):
     return data
 
 def locations(latitude,longitude,lc): 
+    #fix this
     limit = 2
     while(True):
         data=show_locs(latitude,longitude,limit)
-        print(f"{bot_name}: Enter choice between 1-{limit} to confirm your appoinment at that service center any other number to show 2 more centers which might be closer to your location")
+        print(f"{bot_name}: Enter choice between 1-{len(data)} to confirm your appoinment at that service center any other number to show 2 more centers which might be closer to your location")
         print("User:",end=' ')
         choice=int(input())
-        if(choice>=0 and choice<=limit):
+        if(choice>0 and choice<=len(data)):
             return data[choice-1]            
         else:
             limit+=2
-            clear_screen(1)
+            clear_screen(2)
             print(f"{bot_name}: Hi Welcome to appointment Booking Section")
             loc = Nominatim(user_agent="GetLoc")
             print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers")
@@ -57,7 +60,7 @@ def locations(latitude,longitude,lc):
     
 
 def book_appointment():
-    clear_screen(5)
+    clear_screen(2)
     print(f"{bot_name}: Hi Welcome to appointment Booking Section")
     loc = Nominatim(user_agent="GetLoc")
     print(f"{bot_name}: Please enter an area where you would like to search the nearby service centers. enter quit to quit")
@@ -68,11 +71,12 @@ def book_appointment():
     latitude = getLoc.latitude
     longitude = getLoc.longitude
     choosen=locations(latitude,longitude,lc)
-    print("Appointment confirmed at",choosen["title"])
+    print(f"{bot_name}: Appointment confirmed at",choosen["title"])
     fname = input("Enter your first name: ")
     lname = input("Enter your last name: ")
     lapname = input("Enter Laptop name and model: ")
     insertdb(fname,lname,lapname,choosen['title'],choosen['address']['label'])
+    print(f"{bot_name}: Thanks for the info, your issue has been reported.\nYour appointment is booked for tomorrow.")
     exit(0)
 
 if __name__=="__main__":
@@ -86,18 +90,19 @@ if __name__=="__main__":
     model = NeuralNet(input_size, hidden_size, output_size).to(device)
     model.load_state_dict(model_state)
     model.eval()
-    bot_name = "Mr.Rebot"
     d1={}
     all_prev_tags=[]
     all_prev_probs=[]
     quits=False
-    print("type quit to exit")
+    print(f"{bot_name}: Hi!\nI'm {bot_name}!\nI might be able to solve your problem with your laptop.\nAsk a question or type 'quit' to exit")
     autCorrect = AutoCorrect()
     while ded==False and quits==False:
         print()
+        #start
         sentence = input("U: ").lower()
         if sentence == "quit":
             quits=True
+            print("Thank You! Have a great day!")
             break
         sentence = tokenize(sentence)
         sentence = [autCorrect.correctWord(word) for word in sentence]
@@ -110,36 +115,41 @@ if __name__=="__main__":
         probs = torch.softmax(output, dim=1)
         prob = probs[0][predicted]
         fina_prob=prob.item()
+
         print(tag)
+        
         if(tag=="disagree" and len(all_prev_tags)>0):
             predicted=all_prev_tags[-1]
-            tag=tags[predicted.item()] 
-            fina_prob=all_prev_probs[-1]           
+            tag=tags[predicted.item()]
+            fina_prob=all_prev_probs[-1]
         elif(tag=="agree" or tag=="thanks"):
             all_prev_tags=[]
             all_prev_probs=[]
             d1={}
         elif tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]:
             all_prev_tags.append(predicted)
-            all_prev_probs.append(fina_prob) 
-        print("Tag decided now is :",tag,"Prob of which is :",fina_prob)    
-        if fina_prob > 0.7:
+            all_prev_probs.append(fina_prob)
+        print("Tag decided now is :",tag,"Prob of which is :",fina_prob)
+        #check for valid question
+        if fina_prob > 0.44:
             for intent in intents["intents"]:
                 if tag == intent["tag"]:
+                    #if the question isn't asked before
                     if(tag not in d1 ):
                         picks=random.choice(intent['responses'])
                         if(tag not in ["greeting","goodbye","funny","thanks","filler","agree","disagree","appointment","none"]):
                             d1[tag]=[picks]
                         print(f"{bot_name}: {picks}")
-                    else:                    
+                    else: #if the response to previous question wasn't satisfactory
                         if(len(d1[tag])==5):
+                        #if all responses are exhausted then do this:
                             ded=True
-                            print(f"{bot_name}: All possible solutions have been tried. Would You Like to go ahead to book an appointment at a Service Centre")
+                            print(f"{bot_name}: All possible solutions have been tried.\nType 'yes' to go ahead to book an appoinment, anything else to continue.")
                             print(f"{bot_name}: Enter Yes or No only")
                             print("U :",end=' ')
                             ch=input().lower()
                             if(ch=="yes"):
-                                print("So taking you to a service center appointment part in 5 seconds")                                                      
+                                print("Taking you to a service center appointment part...")                                                      
                                 book_appointment()
                             else:
                                 exit(0)
@@ -154,15 +164,17 @@ if __name__=="__main__":
                         quits=True
                 else: continue
         else:
+            #if query isnt stringly matching any tag then do this:
             ded=True
-            print(f"{bot_name}: No solution found for your query. Type Yes to go ahead to book an appoinment No to stop")
+            print(f"{bot_name}: No solution found for your query.\nType 'yes' to go ahead to book an appoinment, anything else to continue.")
             print("U :",end=' ')
             ch=input().lower()
             if(ch=="yes"):
-                print("So taking you to a service center appointment part in 5 seconds")                                                      
+                print("Taking you to a service center appointment part...")                                                      
                 book_appointment() 
             else:
-                exit(0)      
+                ded = False
+                continue      
 
     if(quits==False):
         book_appointment()

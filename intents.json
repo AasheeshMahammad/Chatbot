@@ -74,6 +74,8 @@
           "give me another solution",
           "I dont think it works",
           "no change",
+          "the issue isnt getting solved",
+          "Nothing seems to be working",
           "any other way"
         ]
       },
@@ -81,11 +83,13 @@
         "tag":"appointment",
         "patterns":[
           "Can I book an appointment?",
-          "Nothing is working",
+          "I want to book an appointment?",
+          "I am looking for a person to service my laptop",
           "I need to talk to the service person",
           "I dont know how to do it",
           "I dont know what to do",
-          "I had enough"
+          "I dont want to talk to you",
+          "I had enough of this"
         ],
         "responses":["Would You Like to go ahead to book an appointment at a Service Centre?\nEnter Yes or No only: "]
       },
