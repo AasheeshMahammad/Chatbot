@@ -8,7 +8,12 @@
           "How are you",
           "Is anyone there?",
           "Hello",
-          "Good day"
+          "Good day",
+          "Sup",
+          "Hola",
+          "good morning",
+          "good afternoon",
+          "good evening"
         ],
         "responses": [
           "Hey :-)",
@@ -19,7 +24,7 @@
       },
       {
         "tag": "goodbye",
-        "patterns": ["Bye", "See you later", "Goodbye"],
+        "patterns": ["Bye", "See you later", "Goodbye","tata","sayonara"],
         "responses": [
           "See you later, thanks for visiting",
           "Have a nice day",
@@ -505,9 +510,9 @@
       {
         "tag":"none",
         "patterns":[
-          "dhbfdvbieneqnvbiewvfbjkbfAVKBABHVWYTCDUWDVKVVbbjcvfekvbeb",
-          "qweytfyuuoiuoppafhjfllgjhjzcbnxmmz",
-          "asdgfhjkjlzcxvbnm",
+          "I want to eat a pizza",
+          "can you hit me",
+          "ok man",
           "zxvccnmbcx",
           "asdfghjkl",
           "qwertyuiop"
